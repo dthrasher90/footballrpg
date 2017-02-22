@@ -3,31 +3,46 @@
 var tackle,
     yards,
     yardsToGo,
-    quarter,
-    totalYards;
+    totalYards,
+    quarter;
+
+var totalYards="";
 
 var downs = 1;
 
 function myfunction(){
 
   var play = document.getElementById('numberselected').value;
-  console.log(+play);
+//  console.log(+play);
   var playint = +play;
 
   switch (playint) {
     case 1:
-    console.log("run left");
     runLeft();
     break;
 
     case 2:
-    console.log("run middle");
+
     runMiddle();
     break;
 
     case 3:
-    console.log("run right");
+
     runRight();
+    break;
+
+    case 4:
+    shortPassLeft();
+    break;
+
+    case 5:
+
+    shortPassMiddle();
+    break;
+
+    case 6:
+
+    shortPassRight();
     break;
 
     default:
@@ -35,53 +50,121 @@ function myfunction(){
     }
 }
 
+//======================Plays=============================================
 function runLeft(){
 
-  var d20 = Math.floor((Math.random() * 20) + 1);
-  var d10 = Math.floor((Math.random() * 10) + 1);
-
-    if (d20>10){
+var d20 = Math.floor((Math.random() * 20) + 1);
+var d10 = Math.floor((Math.random() * 10) + 1);
+    if (d20 > 10){
       yards = d10;
       console.log ("run left for " + yards + " yards");
+      addYards();
     } else{
       console.log("tackle for no gain");
     }
-    checkDowns();
+      checkDowns();
+
+
 }
 
 function runMiddle(){
     var d20 = Math.floor((Math.random() * 20) + 1);
     var d10 = Math.floor((Math.random() * 10) + 1);
+
     if (d20>10){
+      yards = d10;
       console.log ("run middle for " + d10 + " yards");
+        addYards();
     } else{
       console.log("tackle for no gain");
     }
     checkDowns();
+
+
 }
 
 function runRight(){
     var d20 = Math.floor((Math.random() * 20) + 1);
     var d10 = Math.floor((Math.random() * 10) + 1);
+
     if (d20>10){
-      console.log ("run right for " + d10 + " yards");
+      yards = d10;
+      console.log ("run right for " + yards + " yards");
+
+      addYards();
     } else{
       console.log("tackle for no gain");
     }
     checkDowns();
+
+
 }
 
+function shortPassLeft(){
+
+var d20 = Math.floor((Math.random() * 20) + 1);
+var d10 = Math.floor((Math.random() * 10) + 1);
+    if (d20 > 10){
+      yards = d10;
+      console.log ("pass left for " + yards + " yards");
+      addYards();
+    } else{
+      console.log("incomplete");
+    }
+    checkDowns();
+
+
+
+}
+
+function shortPassMiddle(){
+
+var d20 = Math.floor((Math.random() * 20) + 1);
+var d10 = Math.floor((Math.random() * 10) + 1);
+    if (d20 > 10){
+      yards = d10;
+      console.log ("pass left for " + yards + " yards");
+      addYards();
+    } else{
+      console.log("incomplete");
+    }
+    checkDowns();
+
+
+
+}
+
+function shortPassRight(){
+
+var d20 = Math.floor((Math.random() * 20) + 1);
+var d10 = Math.floor((Math.random() * 10) + 1);
+    if (d20 > 10){
+      yards = d10;
+      console.log ("pass left for " + yards + " yards");
+      addYards();
+    } else{
+      console.log("incomplete");
+    }
+    checkDowns();
+}
+
+
+//=================================EVAl=====================================
+
+
+
+
+function addYards(){
+  totalYards = +totalYards;
+  totalYards += yards;
+
+
+}
 function checkDowns(){
 
-
-  console.log(yards + " yards");
-  if (downs < 4) {
-    downs++;
-   console.log(downs);
-    } else {
-   console.log("fourth down, stopped by defense");
-   spectialTeams();
-    }
+  yardsToGo = 10 - totalYards;
+  console.log("total yards " + totalYards );
+  console.log(yardsToGo + " yards to go");
 
 
 }
