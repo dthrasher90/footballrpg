@@ -4,6 +4,7 @@ var tackle,
     yards,
     yardsToGo,
     totalYards,
+    downs,
     quarter;
 
 var totalYards="";
@@ -166,6 +167,10 @@ function checkDowns(){
   console.log("total yards " + totalYards );
   console.log(yardsToGo + " yards to go");
 
+  if (yardsToGo < 10)
+    downs++;
+    console.log(downs+ " & " + yardsToGo);
+  } 
 
 }
 
