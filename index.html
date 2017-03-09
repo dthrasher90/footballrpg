@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>hello phaser!</title>
+    <script src="phaser.min.js"></script>
+    <script src="huddle.js">  </script>
+ 	 <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+</head>
+
+<body>
+
+    <script type="text/javascript">
+
+            //  Note that this html file is set to pull down Phaser 2.5.0 from the JS Delivr CDN.
+            //  Although it will work fine with this tutorial, it's almost certainly not the most current version.
+            //  Be sure to replace it with an updated version before you start experimenting with adding your own code.
+
+            var HuddleState = {
+               preload:  function(){
+                 game.load.image('huddle', 'assets/huddle.png');
+
+               },
+
+               create: function(){
+                 var huddle = game.add.sprite(0,0, 'huddle', function(){
+                   game.state.start('GameActionState');
+                 });
+                 huddle.scale.setTo(2);
+
+
+
+               },
+
+               update: function(){}
+
+            };
+
+
+            var wr1, wr2, wr3, wr4;
+            var game = new Phaser.Game(800, 600, Phaser.AUTO);
+
+
+            var GameActionState  = {
+               preload: function(){
+                  game.load.spritesheet('player', 'assets/player2.png',61, 70, 16);
+                  game.load.spritesheet('player2', 'assets/player.png', 14, 20, 28);
+                  game.load.spritesheet('tb3', 'assets/tb3.png', 14, 20, 50);
+                  game.load.image('field', 'assets/footballfield.jpg');
+                  game.load.image('wr1', 'assets/reddot.png');
+                  game.load.image('wr2', 'assets/reddot.png');
+                  game.load.image('wr3', 'assets/reddot.png');
+                  game.load.image('wr4', 'assets/reddot.png');
+                  game.load.image('qb', 'assets/reddot.png');
+                  game.load.image('lt', 'assets/reddot.png');
+                  game.load.image('lg', 'assets/reddot.png');
+                  game.load.image('ct', 'assets/reddot.png');
+                  game.load.image('rg', 'assets/reddot.png');
+                  game.load.image('rt', 'assets/reddot.png');
+                  game.load.image('football','assets/football.png');
+                  game.load.image('button', 'assets/button.jpg');
+
+                },
+
+
+//================================HUD Graphics ===============================================================
+              create: function(wr1){
+
+
+                // game.physics.arcade.enable(wr1, wr2, wr3, wr4, football);
+
+                var scoreTextHome, scoreTextAway, Time, GameLog, DownLog;
+
+                var score = 0;
+                scoreTextHome = game.add.text(0.1, 0, 'Home: 0', { font: '20px Press Start 2P', fill: '#ffffff' });
+                scoreTextAway = game.add.text(0.1, 21, 'Away: 0', { font: '20px Press Start 2P', fill: '#ffffff' });
+                Time = game.add.text(310, 0, 'Time: 00:00', {font: '20px Press Start 2P', fill: '#ffffff' });
+                DownLog = game.add.text(650, 0, '1 & 10 ',{font: '20px Press Start 2p', fill: '#ffffff' });
+
+
+                GameLog= game.add.text(0, 400, 'Game Log',{font: '20px Press Start 2P', fill: '#cccc00' });
+
+
+//================Images Loaded======================================================================
+                var field = game.add.button(15, 50, 'field');
+               field.scale.setTo(1.1);
+                field.anchor.setTo(0);
+
+                var wr1 =  this.game.add.sprite(500, 100, 'wr1');
+                wr1.scale.setTo(0.3);
+                var wr2 = this.game.add.sprite(500, 300, 'wr2');
+                wr2.scale.setTo(0.3);
+                var wr3 = this.game.add.sprite(500, 400, 'wr3');
+                wr3.scale.setTo(0.3);
+                var wr4 = this.game.add.sprite(500, 455, 'wr4');
+                wr4.scale.setTo(0.3);
+                var qb = this.game.add.sprite(500, 300, 'qb');
+                qb.scale.setTo(0.3);
+
+                var lt =  this.game.add.sprite(550, 100, 'lt');
+                lt.scale.setTo(0.3);
+
+                var lg =  this.game.add.sprite(555, 100, 'lg');
+                lg.scale.setTo(0.3);
+
+                var ct =  this.game.add.sprite(560, 100, 'ct');
+                ct.scale.setTo(0.3);
+
+                var rg =  this.game.add.sprite(565, 100, 'rg');
+                rg.scale.setTo(0.3);
+
+                var rt =  this.game.add.sprite(570, 100, 'rt');
+                rt.scale.setTo(0.3);
+
+
+
+
+                var football = this.game.add.sprite(400, 220, 'football');
+                football.scale.setTo(0.1);
+
+
+
+
+//============================GameButtons===========================================================
+
+        //
+        //         var button = this.game.add.button(game.world.centerX, 500, 'button', function(){
+        //           alert("button pressed");
+        //
+        //
+        //           var tweenA = game.add.tween(wr1).to({x: '-200'  }, 2000);
+        //           var tweenB = game.add.tween(wr2).to({  y: '+200'  }, 2000);
+        //           var tweenC = game.add.tween(wr3).to({ x: '-200 '}, 2000);
+        //           var tweenD = game.add.tween(wr4).to({ y: '-200'}, 2000);
+        //
+        //           tweenA.start();
+        //           tweenB.start();
+        //           tweenC.start();
+        //           tweenD.start();
+        //
+        // tweenA.onComplete.add(function() {  game.time.events.add(1000, function() {
+        //             var d20 = Math.floor((Math.random() * 20) + 1);
+        //
+        //             if(d20> 2){
+        //                   console.log("ball caught by wr3");
+        //                   game.state.add('HuddleState', HuddleState);
+        //                   game.state.start('HuddleState');
+        //
+        //             } else {
+        //                   console.log('incommplete pass');
+        //
+        //             } }, this);}, this);
+        //
+        //
+        //             }, this, 0,0,0);
+        //
+        //
+        //
+        //
+        //
+        //
+         },
+
+
+
+                update: function(){}
+            };
+
+
+
+
+
+            game.state.add('GameActionState', GameActionState);
+            game.state.start('GameActionState');
+            // game.state.add('HuddleState', HuddleState);
+            // game.state.start('HuddleState');
+
+
+
+    </script>
+
+</body>
+
+</html>
